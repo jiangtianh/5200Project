@@ -59,4 +59,46 @@ public class TitlesDao {
         }
         return null;
     }
+
+
+    public Title getTitleByPrimaryTitle(String primaryTitle) throws SQLException {
+        String selectTitle = "SELECT titleId, titleType, primaryTitle, originalTitle, isAdult, startYear, endYear, runtimeMinutes FROM Titles WHERE primaryTitle=?;";
+        Connection connection = null;
+        PreparedStatement selectStmt = null;
+        ResultSet results = null;
+
+        try {
+            connection = connectionManager.getConnection();
+            selectStmt = connection.prepareStatement(selectTitle);
+            selectStmt.setString(1, primaryTitle);
+            results = selectStmt.executeQuery();
+
+            if (results.next()) {
+                String resultTitleId = results.getString("titleId");
+                Title.TitleType titleType = Title.TitleType.valueOf(results.getString("titleType"));
+                String originalTitle = results.getString("originalTitle");
+                boolean isAdult = results.getBoolean("isAdult");
+                int startYear = results.getInt("startYear");
+                int endYear = results.getInt("endYear");
+                int runtimeMinutes = results.getInt("runtimeMinutes");
+                Title title = new Title(resultTitleId, titleType, primaryTitle, originalTitle, isAdult, startYear, endYear, runtimeMinutes);
+                return title;
+            }
+        } finally {
+            if (results != null) {
+                results.close();
+            }
+            if (selectStmt != null) {
+                selectStmt.close();
+            }
+            if (connection != null) {
+                connectionManager.closeConnection(connection);
+            }
+        }
+        return null;
+    }
+
+
+
+
 }
