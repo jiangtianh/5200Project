@@ -36,7 +36,7 @@ public class UsersDao {
             insertStmt.setString(4, user.getLastName());
             insertStmt.setDate(5, user.getDob());
             insertStmt.setString(6, user.getMbti());
-            insertStmt.setString(7, user.getProfession().name());
+            insertStmt.setString(7, user.getProfession().name().replace('_', ' '));
             insertStmt.executeUpdate();
 
             return user;
@@ -72,7 +72,7 @@ public class UsersDao {
                 String lastName = results.getString("lastName");
                 java.sql.Date dob = results.getDate("dob");
                 String mbti = results.getString("MBTI");
-                User.Profession profession = User.Profession.valueOf(results.getString("Profession"));
+                User.Profession profession = User.Profession.valueOf(results.getString("Profession").replace(' ', '_'));
                 User user = new User(resultUserName, password, firstName, lastName, dob, mbti, profession);
                 return user;
             }

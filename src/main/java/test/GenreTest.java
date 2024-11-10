@@ -1,10 +1,12 @@
+package test;
+
 import dal.GenresDao;
 import model.Genre;
 
 import java.sql.SQLException;
 import java.util.List;
 
-public class test {
+public class GenreTest {
 
     public static void main(String[] args) {
         GenresDao genresDao = GenresDao.getInstance();

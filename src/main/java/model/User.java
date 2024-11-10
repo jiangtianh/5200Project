@@ -10,16 +10,16 @@ public class User {
     private Profession profession;
 
     public enum Profession {
-        ACCOUNTANT, AUDITOR, FINANCIAL_ANALYST, BOOKKEEPER, INVESTMENT_BANKER, GRAPHIC_DESIGNER, ILLUSTRATOR, PHOTOGRAPHER, FASHION_DESIGNER, ANIMATOR,
-        MANAGER, CONSULTANT, BUSINESS_ANALYST, HUMAN_RESOURCES_MANAGER, OPERATIONS_MANAGER, CIVIL_ENGINEER, ARCHITECT, CONSTRUCTION_WORKER, ELECTRICAL_ENGINEER, MECHANICAL_ENGINEER,
-        TEACHER, PROFESSOR, EDUCATIONAL_ADMINISTRATOR, TUTOR, SCHOOL_COUNSELOR, DOCTOR, NURSE, PHARMACIST, DENTIST, PHYSICAL_THERAPIST,
-        SOFTWARE_DEVELOPER, DATA_ANALYST, SYSTEMS_ADMINISTRATOR, CYBERSECURITY_SPECIALIST, IT_SUPPORT_SPECIALIST, LAWYER, PARALEGAL, JUDGE, LEGAL_ASSISTANT, COURT_CLERK,
-        MARKETING_MANAGER, SALES_REPRESENTATIVE, SOCIAL_MEDIA_MANAGER, BRAND_MANAGER, ADVERTISING_EXECUTIVE, BIOLOGIST, CHEMIST, PHYSICIST, RESEARCH_SCIENTIST, LAB_TECHNICIAN,
-        ELECTRICIAN, PLUMBER, CARPENTER, MECHANIC, WELDER, TRUCK_DRIVER, DELIVERY_DRIVER, PILOT, TRAIN_CONDUCTOR, LOGISTICS_COORDINATOR,
-        CHEF, WAITER, HOTEL_MANAGER, EVENT_PLANNER, BARTENDER, POLICE_OFFICER, FIREFIGHTER, POSTAL_WORKER, SOCIAL_WORKER, PUBLIC_ADMINISTRATOR,
-        JOURNALIST, EDITOR, PUBLIC_RELATIONS_SPECIALIST, TV_HOST, COPYWRITER, STORE_MANAGER, CASHIER, MERCHANDISER, SALES_ASSOCIATE, INVENTORY_SPECIALIST,
-        REAL_ESTATE_AGENT, PROPERTY_MANAGER, APPRAISER, REAL_ESTATE_DEVELOPER, LEASING_AGENT, ACTOR, MUSICIAN, DIRECTOR, COMEDIAN, DANCER,
-        ATHLETE, COACH, PERSONAL_TRAINER, SPORTS_MANAGER, PHYSICAL_EDUCATION_TEACHER, CUSTOMER_SERVICE_REPRESENTATIVE, CALL_CENTER_AGENT, TECHNICAL_SUPPORT_SPECIALIST, CONCIERGE, HELP_DESK_SPECIALIST
+        Accountant, Auditor, Financial_Analyst, Bookkeeper, Investment_Banker, Graphic_Designer, Illustrator, Photographer, Fashion_Designer, Animator,
+        Manager, Consultant, Business_Analyst, Human_Resources_Manager, Operations_Manager, Civil_Engineer, Architect, Construction_Worker, Electrical_Engineer, Mechanical_Engineer,
+        Teacher, Professor, Educational_Administrator, Tutor, School_Counselor, Doctor, Nurse, Pharmacist, Dentist, Physical_Therapist,
+        Software_Developer, Data_Analyst, Systems_Administrator, Cybersecurity_Specialist, IT_Support_Specialist, Lawyer, Paralegal, Judge, Legal_Assistant, Court_Clerk,
+        Marketing_Manager, Sales_Representative, Social_Media_Manager, Brand_Manager, Advertising_Executive, Biologist, Chemist, Physicist, Research_Scientist, Lab_Technician,
+        Electrician, Plumber, Carpenter, Mechanic, Welder, Truck_Driver, Delivery_Driver, Pilot, Train_Conductor, Logistics_Coordinator,
+        Chef, Waiter, Hotel_Manager, Event_Planner, Bartender, Police_Officer, Firefighter, Postal_Worker, Social_Worker, Public_Administrator,
+        Journalist, Editor, Public_Relations_Specialist, TV_Host, Copywriter, Store_Manager, Cashier, Merchandiser, Sales_Associate, Inventory_Specialist,
+        Real_Estate_Agent, Property_Manager, Appraiser, Real_Estate_Developer, Leasing_Agent, Actor, Musician, Director, Comedian, Dancer,
+        Athlete, Coach, Personal_Trainer, Sports_Manager, Physical_Education_Teacher, Customer_Service_Representative, Call_Center_Agent, Technical_Support_Specialist, Concierge, Help_Desk_Specialist
     }
 
     public User(String username, String password, String firstName, String lastName, java.sql.Date dob, String mbti, Profession profession) {
@@ -32,10 +32,11 @@ public class User {
         this.profession = profession;
     }
 
+
+
     public String getUsername() {
         return username;
     }
-
     public void setUsername(String username) {
         this.username = username;
     }
