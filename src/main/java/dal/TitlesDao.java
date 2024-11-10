@@ -22,7 +22,7 @@ public class TitlesDao {
     }
 
 
-    public Title getTitleById(int titleId) throws SQLException {
+    public Title getTitleById(String titleId) throws SQLException {
         String selectTitle = "SELECT titleId, titleType, primaryTitle, originalTitle, isAdult, startYear, endYear, runtimeMinutes FROM Titles WHERE titleId=?;";
         Connection connection = null;
         PreparedStatement selectStmt = null;
@@ -31,7 +31,7 @@ public class TitlesDao {
         try {
             connection = connectionManager.getConnection();
             selectStmt = connection.prepareStatement(selectTitle);
-            selectStmt.setInt(1, titleId);
+            selectStmt.setString(1, titleId);
             results = selectStmt.executeQuery();
 
             if (results.next()) {
