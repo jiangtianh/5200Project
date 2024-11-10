@@ -26,7 +26,7 @@ public class test {
             }
 
             // Test getGenreByName
-            Genre genreByName = genresDao.getGenreByName("Sport");
+            Genre genreByName = genresDao.getGenreByName("Documentary");
             if (genreByName != null) {
                 System.out.println("Genre by name 'Documentary': " + genreByName.getGenreName());
             } else {
