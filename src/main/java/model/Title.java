@@ -33,6 +33,9 @@ public class Title {
         this.endYear = endYear;
         this.runtimeMinutes = runtimeMinutes;
     }
+    public Title (String titleId) {
+        this.titleId = titleId;
+    }
 
     // Getters and Setters
     public String getTitleId() {

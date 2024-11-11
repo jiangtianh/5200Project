@@ -75,7 +75,7 @@ public class RatingsDao {
                 String resultTitleId = results.getString("TitleId");
                 double averageRating = results.getDouble("AverageRating");
                 int numVotes = results.getInt("NumVotes");
-                Rating rating = new Rating(title, (float) averageRating, numVotes);
+                Rating rating = new Rating(title, averageRating, numVotes);
                 return rating;
             }
         } finally {

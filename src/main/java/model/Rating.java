@@ -2,10 +2,10 @@ package model;
 
 public class Rating {
     private Title title;
-    private float averageRating;
+    private double averageRating;
     private int numVotes;
 
-    public Rating(Title title, float averageRating, int numVotes) {
+    public Rating(Title title, double averageRating, int numVotes) {
         this.title = title;
         this.averageRating = averageRating;
         this.numVotes = numVotes;
@@ -13,7 +13,7 @@ public class Rating {
     public Rating(Title title) {
         this.title = title;
     }
-    public Rating(float averageRating, int numVotes) {
+    public Rating(double averageRating, int numVotes) {
         this.averageRating = averageRating;
         this.numVotes = numVotes;
     }
@@ -25,10 +25,10 @@ public class Rating {
         this.title = title;
     }
 
-    public float getAverageRating() {
+    public double getAverageRating() {
         return averageRating;
     }
-    public void setAverageRating(float averageRating) {
+    public void setAverageRating(double averageRating) {
         this.averageRating = averageRating;
     }
 

@@ -31,6 +31,9 @@ public class User {
         this.mbti = mbti;
         this.profession = profession;
     }
+    public User(String username) {
+        this.username = username;
+    }
 
 
 

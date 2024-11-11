@@ -4,23 +4,23 @@ public class Review {
     private int reviewId;
     private Title title;
     private User user;
-    private float rating;
+    private double rating;
     private String content;
 
-    public Review(int reviewId, Title title, User user, float rating, String content) {
+    public Review(int reviewId, Title title, User user, double rating, String content) {
         this.reviewId = reviewId;
         this.title = title;
         this.user = user;
         this.rating = rating;
         this.content = content;
     }
-    public Review(Title title, User user, float rating, String content) {
+    public Review(Title title, User user, double rating, String content) {
         this.title = title;
         this.user = user;
         this.rating = rating;
         this.content = content;
     }
-    public Review (int reviewId) {
+    public Review (int reviewId, double rating, String content) {
         this.reviewId = reviewId;
     }
     public Review (Title title) {
@@ -50,10 +50,10 @@ public class Review {
     public void setTitle(Title title) {
         this.title = title;
     }
-    public float getRating() {
+    public double getRating() {
         return rating;
     }
-    public void setRating(float rating) {
+    public void setRating(double rating) {
         this.rating = rating;
     }
     public String getContent() {
