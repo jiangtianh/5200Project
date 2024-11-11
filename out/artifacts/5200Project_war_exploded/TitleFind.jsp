@@ -48,7 +48,11 @@
         </tr>
         <c:forEach var="title" items="${titles}">
             <tr>
-                <td><c:out value="${title.titleId}"/></td>
+                <td>
+                    <a href="titledetail?titleId=${title.titleId}">
+                        <c:out value="${title.titleId}"/>
+                    </a>
+                </td>
                 <td><c:out value="${title.titleType}"/></td>
                 <td><c:out value="${title.primaryTitle}"/></td>
                 <td><c:out value="${title.originalTitle}"/></td>
