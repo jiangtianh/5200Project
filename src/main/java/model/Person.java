@@ -14,6 +14,13 @@ public class Person {
         this.deathYear = deathYear;
         this.primaryProfession = primaryProfession;
     }
+    public Person(String personId) {
+        this.personId = personId;
+    }
+
+
+
+
 
     public String getPersonId() {
         return personId;
