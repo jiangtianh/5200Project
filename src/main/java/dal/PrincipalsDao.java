@@ -39,7 +39,7 @@ public class PrincipalsDao {
             selectStmt.setString(1, title.getTitleId());
             results = selectStmt.executeQuery();
 
-
+            PersonDao personDao = PersonDao.getInstance();
 
             while (results.next()) {
                 String resultTitleId = results.getString("titleId");
@@ -48,7 +48,8 @@ public class PrincipalsDao {
                 Principals.JobCategory category = Principals.JobCategory.valueOf(results.getString("category"));
                 String job = results.getString("job");
                 String characters = results.getString("characters");
-                Principals principal = new Principals(title, ordering, new Person(personId), category, job, characters);
+                Person person = personDao.getPersonByPersonId(personId);
+                Principals principal = new Principals(title, ordering, person, category, job, characters);
                 principals.add(principal);
             }
         } finally {

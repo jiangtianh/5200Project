@@ -1,11 +1,7 @@
 package servlet;
 
-import dal.RatingsDao;
-import dal.TitleGenreDao;
-import dal.TitlesDao;
-import model.Genre;
-import model.Rating;
-import model.Title;
+import dal.*;
+import model.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,12 +17,16 @@ public class TitleDetail extends HttpServlet {
     protected TitlesDao titlesDao;
     protected RatingsDao ratingsDao;
     protected TitleGenreDao titleGenreDao;
+    protected PrincipalsDao principalsDao;
+    protected TitleDirectorDao titleDirectorDao;
 
     @Override
     public void init() throws ServletException {
         titlesDao = TitlesDao.getInstance();
         ratingsDao = RatingsDao.getInstance();
         titleGenreDao = TitleGenreDao.getInstance();
+        principalsDao = PrincipalsDao.getInstance();
+        titleDirectorDao = TitleDirectorDao.getInstance();
     }
 
     @Override
@@ -35,10 +35,17 @@ public class TitleDetail extends HttpServlet {
         Title title = null;
         Rating rating = null;
         List<Genre> genres = null;
+        List<Principals> principals = null;
+        List<Person> directors = null;
         try {
             title = titlesDao.getTitleById(titleId);
             rating = ratingsDao.getRatingByTitle(title);
             genres = titleGenreDao.getGenresForTitle(title);
+            principals = principalsDao.getPrincipalsForTitle(title);
+            principals.sort((p1, p2) -> Integer.compare(p1.getOrdering(), p2.getOrdering()));
+            directors = titleDirectorDao.getDirectorsForTitle(title);
+            
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -46,6 +53,8 @@ public class TitleDetail extends HttpServlet {
         request.setAttribute("title", title);
         request.setAttribute("rating", rating);
         request.setAttribute("genres", genres);
+        request.setAttribute("principals", principals);
+        request.setAttribute("directors", directors);
         request.getRequestDispatcher("/TitleDetail.jsp").forward(request, response);
     }
 }

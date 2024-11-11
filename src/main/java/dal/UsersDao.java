@@ -6,6 +6,8 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UsersDao {
     protected ConnectionManager connectionManager;
@@ -139,6 +141,46 @@ public class UsersDao {
                 deleteStmt.close();
             }
         }
+    }
+
+    public List<User> getAllUsers() throws SQLException {
+        List<User> users = new ArrayList<>();
+        String selectUsers = "SELECT username, password, firstName, lastName, dob, MBTI, Profession FROM Users;";
+        Connection connection = null;
+        PreparedStatement selectStmt = null;
+        ResultSet results = null;
+
+        try {
+            connection = connectionManager.getConnection();
+            selectStmt = connection.prepareStatement(selectUsers);
+            results = selectStmt.executeQuery();
+
+            while (results.next()) {
+                String username = results.getString("username");
+                String password = results.getString("password");
+                String firstName = results.getString("firstName");
+                String lastName = results.getString("lastName");
+                java.sql.Date dob = results.getDate("dob");
+                String mbti = results.getString("MBTI");
+                User.Profession profession = User.Profession.valueOf(results.getString("Profession").replace(' ', '_'));
+                User user = new User(username, password, firstName, lastName, dob, mbti, profession);
+                users.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            if (results != null) {
+                results.close();
+            }
+            if (selectStmt != null) {
+                selectStmt.close();
+            }
+            if (connection != null) {
+                connectionManager.closeConnection(connection);
+            }
+        }
+        return users;
     }
 
 }

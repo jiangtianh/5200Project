@@ -57,6 +57,16 @@
     <div class="detail">
       <span class="label">Original Title:</span> <c:out value="${title.originalTitle}"/>
     </div>
+
+
+    <div class="detail">
+      <span class="label">Directors:</span>
+      <c:forEach var="director" items="${directors}">
+        <span><c:out value="${director.name}"/></span><c:if test="${!director.equals(directors[directors.size()-1])}">, </c:if>
+      </c:forEach>
+    </div>
+
+
     <div class="detail">
       <span class="label">Is Adult:</span> <c:out value="${title.isAdult}"/>
     </div>
@@ -86,6 +96,15 @@
       </c:if>
       <c:if test="${empty rating}">
         <p>No Ratings available yet</p>
+      </c:if>
+    </div>
+
+    <div class="detail">
+      <span class="label">Crews:</span>
+      <c:if test="${not empty principals}">
+        <c:forEach var="principal" items="${principals}">
+          <span><c:out value="${principal.person.name}"/> as <c:out value="${principal.category}"/>, <c:out value="${principal.ordering}"/></span><c:if test="${!principal.equals(principals[principals.size()-1])}">, </c:if>
+        </c:forEach>
       </c:if>
     </div>
 
