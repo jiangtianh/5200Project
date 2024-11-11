@@ -19,7 +19,11 @@ public class User {
         Chef, Waiter, Hotel_Manager, Event_Planner, Bartender, Police_Officer, Firefighter, Postal_Worker, Social_Worker, Public_Administrator,
         Journalist, Editor, Public_Relations_Specialist, TV_Host, Copywriter, Store_Manager, Cashier, Merchandiser, Sales_Associate, Inventory_Specialist,
         Real_Estate_Agent, Property_Manager, Appraiser, Real_Estate_Developer, Leasing_Agent, Actor, Musician, Director, Comedian, Dancer,
-        Athlete, Coach, Personal_Trainer, Sports_Manager, Physical_Education_Teacher, Customer_Service_Representative, Call_Center_Agent, Technical_Support_Specialist, Concierge, Help_Desk_Specialist
+        Athlete, Coach, Personal_Trainer, Sports_Manager, Physical_Education_Teacher, Customer_Service_Representative, Call_Center_Agent, Technical_Support_Specialist, Concierge, Help_Desk_Specialist;
+
+        public static Profession[] getAllProfessions() {
+            return Profession.values();
+        }
     }
 
     public User(String username, String password, String firstName, String lastName, java.sql.Date dob, String mbti, Profession profession) {

@@ -14,6 +14,8 @@
   <body>
     <h1>CineMatch</h1>
 
-    <a href="User/FindUser.jsp">FindUser</a>
+    <a href="UserFind.jsp">Find User</a>
+    <br/>
+    <a href="TitleFind.jsp">Find Title</a>
   </body>
 </html>

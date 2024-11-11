@@ -2,20 +2,8 @@ package model;
 
 public class Title {
 
-    public enum TitleType {
-        SHORT,
-        MOVIE,
-        TVEPISODE,
-        TVMOVIE,
-        TVSERIES,
-        TVSPECIAL,
-        VIDEO,
-        VIDEOGAME
-    }
-
-
     private String titleId;
-    private TitleType titleType;
+    private String titleType;
     private String primaryTitle;
     private String originalTitle;
     private boolean isAdult;
@@ -23,7 +11,7 @@ public class Title {
     private int endYear;
     private int runtimeMinutes;
 
-    public Title(String titleId, TitleType titleType, String primaryTitle, String originalTitle, boolean isAdult, int startYear, int endYear, int runtimeMinutes) {
+    public Title(String titleId, String titleType, String primaryTitle, String originalTitle, boolean isAdult, int startYear, int endYear, int runtimeMinutes) {
         this.titleId = titleId;
         this.titleType = titleType;
         this.primaryTitle = primaryTitle;
@@ -46,11 +34,11 @@ public class Title {
         this.titleId = titleId;
     }
 
-    public TitleType getTitleType() {
+    public String getTitleType() {
         return titleType;
     }
 
-    public void setTitleType(TitleType titleType) {
+    public void setTitleType(String titleType) {
         this.titleType = titleType;
     }
 
@@ -70,7 +58,7 @@ public class Title {
         this.originalTitle = originalTitle;
     }
 
-    public boolean isAdult() {
+    public boolean getIsAdult() {
         return isAdult;
     }
 

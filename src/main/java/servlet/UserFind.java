@@ -14,8 +14,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-@WebServlet("/findUser")
-public class FindUser extends HttpServlet {
+@WebServlet("/finduser")
+public class UserFind extends HttpServlet {
     protected UsersDao usersDao;
 
     @Override
@@ -25,12 +25,13 @@ public class FindUser extends HttpServlet {
 
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Map<String, String> messages = new HashMap<>();
         req.setAttribute("messages", messages);
 
         User user = null;
         String username = req.getParameter("username");
+
         if (username == null || username.trim().isEmpty()) {
             messages.put("success", "Please enter a valid username.");
         } else {
@@ -41,9 +42,10 @@ public class FindUser extends HttpServlet {
                 throw new IOException(e);
             }
             messages.put("success", "Displaying results for " + username);
-            messages.put("previousUsername", username);
+
         }
-        req.setAttribute("users", user);
-        req.getRequestDispatcher("/DisplayUser.jsp").forward(req, resp);
+        req.setAttribute("user", user);
+
+        req.getRequestDispatcher("/UserFind.jsp").forward(req, resp);
     }
 }
