@@ -19,6 +19,9 @@ public class Genre {
         this.genreId = genreId;
         this.genreName = genreName;
     }
+    public Genre(int genreId) {
+        this.genreId = genreId;
+    }
 
     public Genre(String genreName) {
         this.genreName = genreName;
