@@ -183,4 +183,38 @@ public class UsersDao {
         return users;
     }
 
+
+    public User updateUser(User user) throws SQLException {
+        String updateUser = "UPDATE Users SET firstName=?, lastName=?, dob=?, MBTI=?, Profession=?, password=? WHERE username=?;";
+        Connection connection = null;
+        PreparedStatement updateStmt = null;
+
+        try {
+            connection = connectionManager.getConnection();
+            updateStmt = connection.prepareStatement(updateUser);
+            updateStmt.setString(1, user.getFirstName());
+            updateStmt.setString(2, user.getLastName());
+            updateStmt.setDate(3, user.getDob());
+            updateStmt.setString(4, user.getMbti());
+            updateStmt.setString(5, user.getProfession().name().replace('_', ' '));
+            updateStmt.setString(6, user.getPassword());
+            updateStmt.setString(7, user.getUsername());
+            updateStmt.executeUpdate();
+            return user;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            if (connection != null) {
+                connection.close();
+            }
+            if (updateStmt != null) {
+                updateStmt.close();
+            }
+        }
+    }
+
+
+
 }
+

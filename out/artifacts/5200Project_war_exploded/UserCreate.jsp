@@ -60,6 +60,9 @@
             </select>
         </div>
         <button type="submit" class="btn btn-primary btn-block">Create</button>
+        <div class="text-center">
+            <a href="Login.jsp" class="btn btn-secondary btn-block mt-1">Back to Login</a>
+        </div>
     </form>
 
 </div>

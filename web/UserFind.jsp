@@ -11,6 +11,16 @@
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
+
+<%
+    HttpSession currentSession = request.getSession(false);
+    if (currentSession == null || currentSession.getAttribute("loggedInUser") == null) {
+        response.sendRedirect("Login.jsp");
+        return;
+    }
+%>
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -32,7 +42,7 @@
         </div>
     </form>
     <div class="text-center mb-4">
-        <a href="createuser" class="btn btn-secondary">Create a User</a>
+        <a href="index.jsp" class="btn btn-secondary">Back to Main</a>
     </div>
 
     <h1 class="text-center">User Information</h1>

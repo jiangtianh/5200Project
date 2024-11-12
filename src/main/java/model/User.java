@@ -24,6 +24,11 @@ public class User {
         public static Profession[] getAllProfessions() {
             return Profession.values();
         }
+
+        @Override
+        public String toString() {
+            return name().replace('_', ' ');
+        }
     }
 
     public User(String username, String password, String firstName, String lastName, java.sql.Date dob, String mbti, Profession profession) {

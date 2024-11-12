@@ -10,6 +10,16 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%
+    HttpSession currentSession = request.getSession(false);
+    if (currentSession == null || currentSession.getAttribute("loggedInUser") == null) {
+        response.sendRedirect("Login.jsp");
+        return;
+    }
+%>
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -31,6 +41,9 @@
             <span id="message" class="text-danger font-weight-bold">${message}</span>
         </div>
     </form>
+    <div class="text-center mb-4">
+        <a href="index.jsp" class="btn btn-secondary">Back to Main</a>
+    </div>
 
     <c:if test="${not empty people}">
         <div class="table-responsive">
