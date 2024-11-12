@@ -36,32 +36,6 @@
           </c:forEach>
         </p>
 
-          <%--Directors--%>
-        <p class="card-text"><strong>Directors:</strong>
-          <c:forEach var="director" items="${directors}">
-            <span><c:out value="${director.name}"/></span><c:if test="${!director.equals(directors[directors.size()-1])}">, </c:if>
-          </c:forEach>
-        </p>
-
-          <%--Writers--%>
-        <p class="card-text"><strong>Writers:</strong>
-          <c:forEach var="writer" items="${writers}">
-            <span><c:out value="${writer.name}"/></span><c:if test="${!writer.equals(writers[writers.size()-1])}">, </c:if>
-          </c:forEach>
-        </p>
-
-          <%--Stars--%>
-        <p class="card-text"><strong>Stars:</strong>
-          <c:forEach var="star" items="${stars}">
-            <span><c:out value="${star.person.name}"/> as <c:out value="${star.characters}"/></span><c:if test="${!star.equals(stars[stars.size()-1])}">, </c:if>
-          </c:forEach>
-        </p>
-
-        <p class="card-text"><strong>Is Adult:</strong> <c:out value="${title.isAdult}"/></p>
-        <p class="card-text"><strong>Start Year:</strong> <c:out value="${title.startYear}"/></p>
-        <p class="card-text"><strong>End Year:</strong> <c:out value="${title.endYear}"/></p>
-        <p class="card-text"><strong>Runtime Minutes:</strong> <c:out value="${title.runtimeMinutes}"/></p>
-
           <%-- Ratings --%>
         <p class="card-text"><strong>Ratings:</strong>
           <c:if test="${not empty rating}">
@@ -71,6 +45,57 @@
             <span>No Ratings available yet</span>
           </c:if>
         </p>
+
+          <%--Directors--%>
+        <p class="card-text"><strong>Directors:</strong>
+          <c:forEach var="director" items="${directors}">
+            <span>
+              <a href="persondetail?personId=${director.personId}">
+                <c:out value="${director.name}"/>
+              </a>
+            </span><c:if test="${!director.equals(directors[directors.size()-1])}">, </c:if>
+          </c:forEach>
+        </p>
+
+          <%--Writers--%>
+        <p class="card-text"><strong>Writers:</strong>
+          <c:forEach var="writer" items="${writers}">
+            <span>
+              <a href="persondetail?personId=${writer.personId}">
+                <c:out value="${writer.name}"/>
+              </a>
+            </span><c:if test="${!writer.equals(writers[writers.size()-1])}">, </c:if>
+          </c:forEach>
+        </p>
+
+          <%--Stars--%>
+        <p class="card-text"><strong>Stars:</strong>
+          <c:forEach var="star" items="${stars}">
+            <span>
+              <a href="persondetail?personId=${star.person.personId}"><c:out value="${star.person.name}"/></a> as <c:out value="${star.characters}"/>
+            </span><c:if test="${!star.equals(stars[stars.size()-1])}">, </c:if>
+          </c:forEach>
+        </p>
+
+        <p class="card-text"><strong>Crews:</strong>
+          <c:forEach var="crew" items="${crews}">
+            <span>
+              <c:if test="${not empty crew.job}">
+                <c:out value="${crew.job.replace('_', ' ')}"/>:
+              </c:if>
+              <a href="persondetail?personId=${crew.person.personId}"><c:out value="${crew.person.name}"/></a>
+            </span><c:if test="${!crew.equals(crews[crews.size()-1])}">, </c:if>
+          </c:forEach>
+        </p>
+
+
+
+        <p class="card-text"><strong>Is Adult:</strong> <c:out value="${title.isAdult}"/></p>
+        <p class="card-text"><strong>Start Year:</strong> <c:out value="${title.startYear}"/></p>
+        <p class="card-text"><strong>End Year:</strong> <c:out value="${title.endYear}"/></p>
+        <p class="card-text"><strong>Runtime Minutes:</strong> <c:out value="${title.runtimeMinutes}"/></p>
+
+
       </div>
     </div>
   </c:if>
