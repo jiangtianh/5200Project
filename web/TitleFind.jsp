@@ -31,12 +31,29 @@
 <body>
 <div class="container mt-5">
     <h1 class="text-center">Find a Title</h1>
-    <form action="findtitle" method="post" class="mb-4">
+    <form action="findtitle" method="get" class="mb-4">
         <div class="form-group">
             <label for="title">Title</label>
             <input id="title" name="title" type="text" class="form-control" value="${fn:escapeXml(param.title)}"/>
         </div>
         <input type="hidden" name="page" value="${param.page != null ? param.page : 1}"/>
+
+        <div class="form-group">
+            <label for="searchTitleType">Title Type</label>
+            <select id="searchTitleType" name="searchTitleType" class="form-control">
+                <option value="all" ${param.searchTitletype == 'all' ? 'selected' : ''}>All</option>
+                <option value="movie" ${param.searchTitletype == 'movie' ? 'selected' : ''}>Movie</option>
+                <option value="short" ${param.searchTitletype == 'short' ? 'selected' : ''}>Short</option>
+                <option value="tvMovie" ${param.searchTitletype == 'tvMovie' ? 'selected' : ''}>TV Movie</option>
+                <option value="tvSeries" ${param.searchTitletype == 'tvSeries' ? 'selected' : ''}>TV Series</option>
+                <option value="tvEpisode" ${param.searchTitletype == 'tvEpisode' ? 'selected' : ''}>TV Episode</option>
+                <option value="tvSpecial" ${param.searchTitletype == 'tvSpecial' ? 'selected' : ''}>TV Special</option>
+                <option value="video" ${param.searchTitletype == 'video' ? 'selected' : ''}>Video</option>
+                <option value="videoGame" ${param.searchTitletype == 'videoGame' ? 'selected' : ''}>Video Game</option>
+
+            </select>
+        </div>
+
         <button type="submit" class="btn btn-primary btn-block">Search</button>
         <div class="text-center mt-3">
             <span id="successMessage" class="text-success font-weight-bold">${messages}</span>
@@ -86,12 +103,12 @@
             <ul class="pagination justify-content-center">
                 <c:if test="${currentPage > 1}">
                     <li class="page-item">
-                        <a class="page-link" href="findtitle?page=${currentPage - 1}&title=${fn:escapeXml(param.title)}">Previous</a>
+                        <a class="page-link" href="findtitle?page=${currentPage - 1}&title=${fn:escapeXml(param.title)}&searchTitleType=${fn:escapeXml(param.searchTitleType)}">Previous</a>
                     </li>
                 </c:if>
                 <c:if test="${titles.size() == pageSize}">
                     <li class="page-item">
-                        <a class="page-link" href="findtitle?page=${currentPage + 1}&title=${fn:escapeXml(param.title)}">Next</a>
+                        <a class="page-link" href="findtitle?page=${currentPage + 1}&title=${fn:escapeXml(param.title)}&searchTitleType=${fn:escapeXml(param.searchTitleType)}">Next</a>
                     </li>
                 </c:if>
             </ul>

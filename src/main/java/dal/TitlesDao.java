@@ -105,6 +105,47 @@ public class TitlesDao {
     }
 
 
+    public List<Title> getTitleByPrimaryTitleWithTitleType(String primaryTitle, int page, int pageSize, String titleType) throws SQLException {
+        String selectTitle = "SELECT titleId, titleType, primaryTitle, originalTitle, isAdult, startYear, endYear, runtimeMinutes " +
+                "FROM Titles WHERE LOWER(primaryTitle) LIKE ? AND titleType=? LIMIT ? OFFSET ?;";
+        Connection connection = null;
+        PreparedStatement selectStmt = null;
+        ResultSet results = null;
+        List<Title> titles = new ArrayList<>();
+
+        try {
+            connection = connectionManager.getConnection();
+            selectStmt = connection.prepareStatement(selectTitle);
+            selectStmt.setString(1, "%" + primaryTitle.toLowerCase() + "%");
+            selectStmt.setString(2, titleType);
+            selectStmt.setInt(3, pageSize);
+            selectStmt.setInt(4, (page - 1) * pageSize);
+            results = selectStmt.executeQuery();
+
+            while (results.next()) {
+                String resultTitleId = results.getString("titleId");
+                String resultTitleType = results.getString("titleType");
+                String originalTitle = results.getString("originalTitle");
+                boolean isAdult = results.getBoolean("isAdult");
+                int startYear = results.getInt("startYear");
+                int endYear = results.getInt("endYear");
+                int runtimeMinutes = results.getInt("runtimeMinutes");
+                Title title = new Title(resultTitleId, titleType, results.getString("primaryTitle"), originalTitle, isAdult, startYear, endYear, runtimeMinutes);
+                titles.add(title);
+            }
+        } finally {
+            if (results != null) {
+                results.close();
+            }
+            if (selectStmt != null) {
+                selectStmt.close();
+            }
+            if (connection != null) {
+                connectionManager.closeConnection(connection);
+            }
+        }
+        return titles;
+    }
 
 
 }

@@ -69,6 +69,9 @@
   </c:if>
 
   <a href="updateaccountdetails">Update Account Details</a>
+  <div class="text-center mb-4">
+    <a href="index.jsp" class="btn btn-secondary">Back to Main</a>
+  </div>
 
 </div>
 

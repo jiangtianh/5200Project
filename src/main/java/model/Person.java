@@ -47,7 +47,7 @@ public class Person {
         this.deathYear = deathYear;
     }
     public String getPrimaryProfession() {
-        return primaryProfession;
+        return primaryProfession.replace('_', ' ').replace(",",", ");
     }
     public void setPrimaryProfession(String primaryProfession) {
         this.primaryProfession = primaryProfession;

@@ -11,6 +11,8 @@ import dal.TitlesDao;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Objects;
+
 import model.Title;
 
 
@@ -26,6 +28,7 @@ public class TitleFind extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String title = request.getParameter("title");
+        String titleType = request.getParameter("searchTitleType");
         int page = Integer.parseInt(request.getParameter("page"));
         int pageSize = 10; // default page size
 
@@ -33,13 +36,18 @@ public class TitleFind extends HttpServlet {
         List<Title> titles = null;
 
         try {
-            titles = titlesDao.getTitleByPrimaryTitle(title, page, pageSize);
+            if (!Objects.equals(titleType, "all")) {
+                titles = titlesDao.getTitleByPrimaryTitleWithTitleType(title, page, pageSize, titleType);
+            } else {
+                titles = titlesDao.getTitleByPrimaryTitle(title, page, pageSize);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
         request.setAttribute("titles", titles);
         request.setAttribute("currentPage", page);
+        request.setAttribute("searchTitleType", titleType);
         request.setAttribute("pageSize", pageSize);
         request.getRequestDispatcher("/TitleFind.jsp").forward(request, response);
     }

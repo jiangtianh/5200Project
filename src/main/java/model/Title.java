@@ -1,5 +1,8 @@
 package model;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Title {
 
     private String titleId;
@@ -10,6 +13,8 @@ public class Title {
     private int startYear;
     private int endYear;
     private int runtimeMinutes;
+
+    public static List<String> allTitleTypes = Arrays.asList("movie", "short", "tvMovie", "tvSeries", "tvEpisode", "tvSpecial", "video", "videoGame");
 
     public Title(String titleId, String titleType, String primaryTitle, String originalTitle, boolean isAdult, int startYear, int endYear, int runtimeMinutes) {
         this.titleId = titleId;
