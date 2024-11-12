@@ -16,108 +16,76 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
   <title>Title Details</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 20px;
-    }
-    .container {
-      max-width: 600px;
-      margin: auto;
-      padding: 20px;
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    .title {
-      font-size: 24px;
-      margin-bottom: 20px;
-    }
-    .detail {
-      margin-bottom: 10px;
-    }
-    .label {
-      font-weight: bold;
-    }
-  </style>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<div class="container">
-  <h1 class="title">Title Details</h1>
+<div class="container mt-5">
+  <h1 class="text-center">Title Details</h1>
   <c:if test="${not empty title}">
-    <div class="detail">
-      <span class="label">Title ID:</span> <c:out value="${title.titleId}"/>
-    </div>
-    <div class="detail">
-      <span class="label">Title Type:</span> <c:out value="${title.titleType}"/>
-    </div>
-    <div class="detail">
-      <span class="label">Primary Title:</span> <c:out value="${title.primaryTitle}"/>
-    </div>
-    <div class="detail">
-      <span class="label">Original Title:</span> <c:out value="${title.originalTitle}"/>
-    </div>
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Title ID: <c:out value="${title.titleId}"/></h5>
+        <p class="card-text"><strong>Title Type:</strong> <c:out value="${title.titleType}"/></p>
+        <p class="card-text"><strong>Primary Title:</strong> <c:out value="${title.primaryTitle}"/></p>
+        <p class="card-text"><strong>Original Title:</strong> <c:out value="${title.originalTitle}"/></p>
 
+          <%--Genres--%>
+        <p class="card-text"><strong>Genres:</strong>
+          <c:forEach var="genre" items="${genres}">
+            <span><c:out value="${genre.genreName}"/></span><c:if test="${!genre.equals(genres[genres.size()-1])}">, </c:if>
+          </c:forEach>
+        </p>
 
-    <div class="detail">
-      <span class="label">Directors:</span>
-      <c:forEach var="director" items="${directors}">
-        <span><c:out value="${director.name}"/></span><c:if test="${!director.equals(directors[directors.size()-1])}">, </c:if>
-      </c:forEach>
+          <%--Directors--%>
+        <p class="card-text"><strong>Directors:</strong>
+          <c:forEach var="director" items="${directors}">
+            <span><c:out value="${director.name}"/></span><c:if test="${!director.equals(directors[directors.size()-1])}">, </c:if>
+          </c:forEach>
+        </p>
+
+          <%--Writers--%>
+        <p class="card-text"><strong>Writers:</strong>
+          <c:forEach var="writer" items="${writers}">
+            <span><c:out value="${writer.name}"/></span><c:if test="${!writer.equals(writers[writers.size()-1])}">, </c:if>
+          </c:forEach>
+        </p>
+
+          <%--Stars--%>
+        <p class="card-text"><strong>Stars:</strong>
+          <c:forEach var="star" items="${stars}">
+            <span><c:out value="${star.person.name}"/> as <c:out value="${star.characters}"/></span><c:if test="${!star.equals(stars[stars.size()-1])}">, </c:if>
+          </c:forEach>
+        </p>
+
+        <p class="card-text"><strong>Is Adult:</strong> <c:out value="${title.isAdult}"/></p>
+        <p class="card-text"><strong>Start Year:</strong> <c:out value="${title.startYear}"/></p>
+        <p class="card-text"><strong>End Year:</strong> <c:out value="${title.endYear}"/></p>
+        <p class="card-text"><strong>Runtime Minutes:</strong> <c:out value="${title.runtimeMinutes}"/></p>
+
+          <%-- Ratings --%>
+        <p class="card-text"><strong>Ratings:</strong>
+          <c:if test="${not empty rating}">
+            <c:out value="${rating.averageRating}"/> based on <c:out value="${rating.numVotes}"/> votes
+          </c:if>
+          <c:if test="${empty rating}">
+            <span>No Ratings available yet</span>
+          </c:if>
+        </p>
+      </div>
     </div>
-
-
-    <div class="detail">
-      <span class="label">Is Adult:</span> <c:out value="${title.isAdult}"/>
-    </div>
-    <div class="detail">
-      <span class="label">Start Year:</span> <c:out value="${title.startYear}"/>
-    </div>
-    <div class="detail">
-      <span class="label">End Year:</span> <c:out value="${title.endYear}"/>
-    </div>
-    <div class="detail">
-      <span class="label">Runtime Minutes:</span> <c:out value="${title.runtimeMinutes}"/>
-    </div
-
-    <%--Genres--%>
-    <div class="detail">
-      <span class="label">Genres:</span>
-      <c:forEach var="genre" items="${genres}">
-        <span><c:out value="${genre.genreName}"/></span><c:if test="${!genre.equals(genres[genres.size()-1])}">, </c:if>
-      </c:forEach>
-    </div>
-
-    <%-- Ratings --%>
-    <div class="detail">
-      <span class="label">Ratings:</span>
-      <c:if test="${not empty rating}">
-        <c:out value="${rating.averageRating}"/> based on <c:out value="${rating.numVotes}"/> votes
-      </c:if>
-      <c:if test="${empty rating}">
-        <p>No Ratings available yet</p>
-      </c:if>
-    </div>
-
-    <div class="detail">
-      <span class="label">Crews:</span>
-      <c:if test="${not empty principals}">
-        <c:forEach var="principal" items="${principals}">
-          <span><c:out value="${principal.person.name}"/> as <c:out value="${principal.category}"/>, <c:out value="${principal.ordering}"/></span><c:if test="${!principal.equals(principals[principals.size()-1])}">, </c:if>
-        </c:forEach>
-      </c:if>
-    </div>
-
-
   </c:if>
+
   <c:if test="${empty title}">
-    <p>No details found for the given title ID.</p>
+    <p class="text-center">No details found for the given title ID.</p>
   </c:if>
+
+  <div class="text-center">
+    <a href="TitleFind.jsp" class="btn btn-primary">Search another title</a>
+  </div>
 </div>
 
-
-<br/><br/><br/>
-<a href="TitleFind.jsp">Search another title</a>
-
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

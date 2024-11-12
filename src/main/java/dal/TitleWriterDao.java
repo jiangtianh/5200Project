@@ -10,24 +10,24 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TitleDirectorDao {
+public class TitleWriterDao {
     protected ConnectionManager connectionManager;
 
-    private static TitleDirectorDao instance = null;
-    protected TitleDirectorDao() {
+    private static TitleWriterDao instance = null;
+    protected TitleWriterDao() {
         connectionManager = new ConnectionManager();
     }
-    public static TitleDirectorDao getInstance() {
+    public static TitleWriterDao getInstance() {
         if (instance == null) {
-            instance = new TitleDirectorDao();
+            instance = new TitleWriterDao();
         }
         return instance;
     }
 
 
-    public List<Person> getDirectorsForTitle(Title title) throws SQLException {
+    public List<Person> getWritersForTitle(Title title) throws SQLException {
         List<Person> directors = new ArrayList<>();
-        String selectDirectors = "SELECT titleId, personId FROM TitleDirectors WHERE titleId=?";
+        String selectDirectors = "SELECT titleId, personId FROM TitleWriters WHERE titleId=?";
         Connection connection = null;
         PreparedStatement selectStmt = null;
         ResultSet results = null;
@@ -59,9 +59,9 @@ public class TitleDirectorDao {
         return directors;
     }
 
-    public List<Title> getTitlesForDirector(Person person) throws SQLException {
+    public List<Title> getTitlesForWriter(Person person) throws SQLException {
         List<Title> titles = new ArrayList<>();
-        String selectTitles = "SELECT titleId FROM TitleDirectors WHERE personId=?";
+        String selectTitles = "SELECT titleId FROM TitleWriters WHERE personId=?";
         Connection connection = null;
         PreparedStatement selectStmt = null;
         ResultSet results = null;
@@ -72,11 +72,9 @@ public class TitleDirectorDao {
             selectStmt.setString(1, person.getPersonId());
             results = selectStmt.executeQuery();
 
-            TitlesDao titlesDao = TitlesDao.getInstance();
-
             while (results.next()) {
                 String titleId = results.getString("titleId");
-                Title title = titlesDao.getTitleById(titleId);
+                Title title = TitlesDao.getInstance().getTitleById(titleId);
                 titles.add(title);
             }
         } finally {
@@ -92,5 +90,4 @@ public class TitleDirectorDao {
         }
         return titles;
     }
-
 }

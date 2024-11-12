@@ -17,5 +17,8 @@
     <a href="UserFind.jsp">Find User</a>
     <br/>
     <a href="TitleFind.jsp">Find Title</a>
+    <br/>
+    <a href="PersonFind.jsp">Find Person</a>
+
   </body>
 </html>

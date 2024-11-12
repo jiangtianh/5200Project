@@ -27,18 +27,16 @@ public class TitleFind extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String title = request.getParameter("title");
         int page = Integer.parseInt(request.getParameter("page"));
-        int pageSize = 10; // Set your desired page size
+        int pageSize = 10; // default page size
 
         TitlesDao titlesDao = TitlesDao.getInstance();
         List<Title> titles = null;
-        int totalTitles = 0;
+
         try {
             titles = titlesDao.getTitleByPrimaryTitle(title, page, pageSize);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        int totalPages = (int) Math.ceil((double) totalTitles / pageSize);
 
         request.setAttribute("titles", titles);
         request.setAttribute("currentPage", page);

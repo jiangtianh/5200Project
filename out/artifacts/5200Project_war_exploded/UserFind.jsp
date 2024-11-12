@@ -5,7 +5,6 @@
   Time: 6:42 PM
   To change this template use File | Settings | File Templates.
 --%>
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
@@ -17,62 +16,71 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Find a User</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<h1>Find a User</h1>
-<form action="finduser" method="post">
-    <p>
-        <label for="username">Username</label>
-        <input id="username" name="username" type="text" value="${fn:escapeXml(param.username)}"/>
-    </p>
-    <p>
-        <input type="submit">
-        <br/><br/><br/>
-        <span id="successMessage"><b>${messages.success}</b></span>
-    </p>
-</form>
-<br/>
-<a href="createuser">Create a User</a>
+<div class="container mt-5">
+    <h1 class="text-center">Find a User</h1>
+    <form action="finduser" method="post" class="mb-4">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input id="username" name="username" type="text" class="form-control" value="${fn:escapeXml(param.username)}"/>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Search</button>
+        <div class="text-center mt-3">
+            <span id="successMessage" class="text-success font-weight-bold">${messages.success}</span>
+        </div>
+    </form>
+    <div class="text-center mb-4">
+        <a href="createuser" class="btn btn-secondary">Create a User</a>
+    </div>
 
-<h1>User Information</h1>
-<c:if test="${not empty user}">
-    <table>
-        <tr>
-            <th>Field</th>
-            <th>Value</th>
-        </tr>
-        <tr>
-            <td><b>Username:</b></td>
-            <td><c:out value="${user.username}"/></td>
-        </tr>
-        <tr>
-            <td><b>First Name:</b></td>
-            <td><c:out value="${user.firstName}"/></td>
-        </tr>
-        <tr>
-            <td><b>Last Name:</b></td>
-            <td><c:out value="${user.lastName}"/></td>
-        </tr>
-        <tr>
-            <td><b>Date of Birth:</b></td>
-            <td><fmt:formatDate value="${user.dob}" pattern="yyyy-MM-dd"/></td>
-        </tr>
-        <tr>
-            <td><b>MBTI:</b></td>
-            <td><c:out value="${user.mbti}"/></td>
-        </tr>
-        <tr>
-            <td><b>Profession:</b></td>
-            <td><c:out value="${user.profession}"/></td>
-        </tr>
-    </table>
-</c:if>
-<c:if test="${empty user}">
-    <p>No user found with the given username.</p>
-</c:if>
-<br/>
+    <h1 class="text-center">User Information</h1>
+    <c:if test="${not empty user}">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead class="thead-light">
+                <tr>
+                    <th>Field</th>
+                    <th>Value</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><b>Username:</b></td>
+                    <td><c:out value="${user.username}"/></td>
+                </tr>
+                <tr>
+                    <td><b>First Name:</b></td>
+                    <td><c:out value="${user.firstName}"/></td>
+                </tr>
+                <tr>
+                    <td><b>Last Name:</b></td>
+                    <td><c:out value="${user.lastName}"/></td>
+                </tr>
+                <tr>
+                    <td><b>Date of Birth:</b></td>
+                    <td><fmt:formatDate value="${user.dob}" pattern="yyyy-MM-dd"/></td>
+                </tr>
+                <tr>
+                    <td><b>MBTI:</b></td>
+                    <td><c:out value="${user.mbti}"/></td>
+                </tr>
+                <tr>
+                    <td><b>Profession:</b></td>
+                    <td><c:out value="${user.profession}"/></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </c:if>
+    <c:if test="${empty user}">
+        <p class="text-center">No user found with the given username.</p>
+    </c:if>
+</div>
 
-
-
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
