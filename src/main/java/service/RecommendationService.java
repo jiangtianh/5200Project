@@ -32,18 +32,15 @@ public class RecommendationService {
 
     // 1. Recommend by Similar Genres
     public List<Title> recommendBySimilarGenres(int userId) throws SQLException {
-        // Step 1: Get user's high-rated reviews
         List<Review> userReviews = reviewsDao.getReviewByUsername(String.valueOf(userId));
         List<Genre> preferredGenres = new ArrayList<>();
 
-        // Step 2: Identify high-rated genres
         for (Review review : userReviews) {
             if (review.getRating() >= 8) { // Filtering high-rated reviews
                 preferredGenres.addAll(titleGenreDao.getGenresForTitle(review.getTitle()));
             }
         }
 
-        // Step 3: Retrieve recommended titles based on genres
         Set<Title> recommendedTitles = new HashSet<>();
         for (Genre genre : preferredGenres) {
             List<Title> genreTitles = titleGenreDao.getTitlesByGenre(genre);
