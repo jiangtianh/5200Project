@@ -11,7 +11,7 @@
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -29,27 +29,27 @@
     <form action="createuser" method="post" class="mb-4">
         <div class="form-group">
             <label for="username">Username</label>
-            <input id="username" name="username" type="text" class="form-control" value="">
+            <input id="username" name="username" type="text" class="form-control" value="" required>
         </div>
         <div class="form-group">
             <label for="password">Password</label>
-            <input id="password" name="password" type="password" class="form-control" value="">
+            <input id="password" name="password" type="password" class="form-control" value="" required>
         </div>
         <div class="form-group">
             <label for="firstname">First Name</label>
-            <input id="firstname" name="firstname" type="text" class="form-control" value="">
+            <input id="firstname" name="firstname" type="text" class="form-control" value="" required>
         </div>
         <div class="form-group">
             <label for="lastname">Last Name</label>
-            <input id="lastname" name="lastname" type="text" class="form-control" value="">
+            <input id="lastname" name="lastname" type="text" class="form-control" value="" required>
         </div>
         <div class="form-group">
             <label for="dob">Date of Birth (yyyy-mm-dd)</label>
-            <input id="dob" name="dob" type="text" class="form-control" value="">
+            <input id="dob" name="dob" type="date" class="form-control" value=""> required
         </div>
         <div class="form-group">
             <label for="mbti">MBTI</label>
-            <input id="mbti" name="mbti" type="text" class="form-control" value="">
+            <input id="mbti" name="mbti" type="text" class="form-control" value="" required>
         </div>
         <div class="form-group">
             <label for="profession">Profession</label>
