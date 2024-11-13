@@ -23,6 +23,45 @@ public class TitleGenreDao {
         }
         return instance;
     }
+    
+    public List<Title> getTitlesByGenre(Genre genre) throws SQLException {
+        List<Title> titles = new ArrayList<>();
+        String selectTitles = "SELECT t.titleId, t.titleType, t.primaryTitle, t.originalTitle, " +
+                              "t.isAdult, t.startYear, t.endYear, t.runtimeMinutes " +
+                              "FROM Titles AS t " +
+                              "JOIN TitleGenres AS tg ON t.titleId = tg.titleId " +
+                              "WHERE tg.genreId = ?;";
+        
+        Connection connection = null;
+        PreparedStatement selectStmt = null;
+        ResultSet results = null;
+
+        try {
+            connection = connectionManager.getConnection();
+            selectStmt = connection.prepareStatement(selectTitles);
+            selectStmt.setInt(1, genre.getGenreId());
+            results = selectStmt.executeQuery();
+
+            while (results.next()) {
+                Title title = new Title(
+                    results.getString("titleId"),
+                    results.getString("titleType"),
+                    results.getString("primaryTitle"),
+                    results.getString("originalTitle"),
+                    results.getBoolean("isAdult"),
+                    results.getInt("startYear"),
+                    results.getInt("endYear"),
+                    results.getInt("runtimeMinutes")
+                );
+                titles.add(title);
+            }
+        } finally {
+            if (results != null) results.close();
+            if (selectStmt != null) selectStmt.close();
+            if (connection != null) connection.close();
+        }
+        return titles;
+    }
 
     public List<Genre> getGenresForTitle(Title title) throws SQLException {
         List<Genre> genres = new ArrayList<>();
@@ -30,7 +69,7 @@ public class TitleGenreDao {
         Connection connection = null;
         PreparedStatement selectStmt = null;
         ResultSet results = null;
-
+        
         try {
             connection = connectionManager.getConnection();
             selectStmt = connection.prepareStatement(selectGenres);

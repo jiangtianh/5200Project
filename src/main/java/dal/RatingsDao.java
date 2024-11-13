@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RatingsDao {
     protected ConnectionManager connectionManager;
@@ -22,6 +24,48 @@ public class RatingsDao {
         return instance;
     }
 
+    public List<Title> getTopTitlesByRatingAndVotes(int limit, double minRating, int minVotes) throws SQLException {
+        List<Title> topTitles = new ArrayList<>();
+        String selectTopTitles = "SELECT t.titleId, t.titleType, t.primaryTitle, t.originalTitle, " +
+                                 "t.isAdult, t.startYear, t.endYear, t.runtimeMinutes " +
+                                 "FROM Titles AS t " +
+                                 "JOIN Ratings AS r ON t.titleId = r.titleId " +
+                                 "WHERE r.averageRating >= ? AND r.numVotes >= ? " +
+                                 "ORDER BY r.averageRating DESC, r.numVotes DESC " +
+                                 "LIMIT ?;";
+
+        Connection connection = null;
+        PreparedStatement selectStmt = null;
+        ResultSet results = null;
+
+        try {
+            connection = connectionManager.getConnection();
+            selectStmt = connection.prepareStatement(selectTopTitles);
+            selectStmt.setDouble(1, minRating);
+            selectStmt.setInt(2, minVotes);
+            selectStmt.setInt(3, limit);
+            results = selectStmt.executeQuery();
+
+            while (results.next()) {
+                Title title = new Title(
+                    results.getString("titleId"),
+                    results.getString("titleType"),
+                    results.getString("primaryTitle"),
+                    results.getString("originalTitle"),
+                    results.getBoolean("isAdult"),
+                    results.getInt("startYear"),
+                    results.getInt("endYear"),
+                    results.getInt("runtimeMinutes")
+                );
+                topTitles.add(title);
+            }
+        } finally {
+            if (results != null) results.close();
+            if (selectStmt != null) selectStmt.close();
+            if (connection != null) connection.close();
+        }
+        return topTitles;
+    }
 
     // Only called when the Rating does not exist for the Title
     public Rating create(Rating rating) throws SQLException {
