@@ -40,7 +40,7 @@
         </div>
         <div class="form-group">
             <label for="rating">Rating:</label>
-            <input type="number" class="form-control" id="rating" name="rating" min="0" max="10" required>
+            <input type="number" class="form-control" id="rating" name="rating" min="0" max="10" step="0.1" required>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

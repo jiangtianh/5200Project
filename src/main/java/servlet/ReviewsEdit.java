@@ -43,7 +43,8 @@ public class ReviewsEdit extends HttpServlet {
             e.printStackTrace();
         }
 
-        if (review == null || !review.getUser().equals(loggedInUser)) {
+        if (review == null || !review.getUser().getUsername().equals(loggedInUser.getUsername())) {
+            System.out.println("Username and LoggedInUser are not the same");
             resp.sendRedirect("index.jsp");
             return;
         }
@@ -72,16 +73,20 @@ public class ReviewsEdit extends HttpServlet {
             e.printStackTrace();
         }
 
-        if (review == null || !review.getUser().equals(loggedInUser)) {
+        if (review == null || !review.getUser().getUsername().equals(loggedInUser.getUsername())) {
+            System.out.println("Username and LoggedInUser are not the same");
             resp.sendRedirect("index.jsp");
             return;
         }
 
         review.setContent(content);
+        review.setRating(newRating);
         try {
             reviewsDao.update(review);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        resp.sendRedirect("reviewsbyuser");
     }
 }

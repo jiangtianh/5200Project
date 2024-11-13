@@ -82,6 +82,7 @@
                 </tr>
                 </tbody>
             </table>
+            <a href="reviewsbyuser?username=${user.username}">View User's Reviews</a>
         </div>
     </c:if>
     <c:if test="${empty user}">

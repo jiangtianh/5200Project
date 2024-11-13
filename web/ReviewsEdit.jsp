@@ -26,7 +26,7 @@
         </div>
         <div class="form-group">
             <label for="rating">Rating:</label>
-            <input type="number" class="form-control" id="rating" name="rating" min="0" max="5" step="0.1" value="${review.rating}" />
+            <input type="number" class="form-control" id="rating" name="rating" min="0" max="10" step="0.1" value="${review.rating}" />
         </div>
         <button type="submit" class="btn btn-primary">Update Review</button>
     </form>

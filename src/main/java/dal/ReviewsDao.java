@@ -116,6 +116,8 @@ public class ReviewsDao {
         Connection connection = null;
         PreparedStatement updateStmt = null;
         try {
+            Review originalReview = getReviewById(review.getReviewId());
+
             connection = connectionManager.getConnection();
             updateStmt = connection.prepareStatement(updateReview);
             updateStmt.setDouble(1, review.getRating());
@@ -124,11 +126,12 @@ public class ReviewsDao {
             updateStmt.executeUpdate();
 
             // Update the rating for the title
-            double oldRating = getReviewById(review.getReviewId()).getRating();
             Rating originalRating = RatingsDao.getInstance().getRatingByTitle(review.getTitle());
-            double newRating = review.getRating();
-            double updatedRating = (originalRating.getAverageRating() * originalRating.getNumVotes() - oldRating + newRating) / originalRating.getNumVotes();
-            RatingsDao.getInstance().update(new Rating(review.getTitle(), updatedRating, originalRating.getNumVotes()));
+            double originalAvgRating = originalRating.getAverageRating();
+            int originalNumVotes = originalRating.getNumVotes();
+            double originalReviewRating = originalReview.getRating();
+            double newAvgRating = (originalAvgRating * originalNumVotes - originalReviewRating + review.getRating()) / originalNumVotes;
+            RatingsDao.getInstance().update(new Rating(review.getTitle(), newAvgRating, originalNumVotes));
 
             return review;
         } catch (SQLException e) {
