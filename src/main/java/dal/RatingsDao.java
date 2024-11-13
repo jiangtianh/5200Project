@@ -24,7 +24,7 @@ public class RatingsDao {
 
 
     // Only called when the Rating does not exist for the Title
-    public Rating create(Rating rating) {
+    public Rating create(Rating rating) throws SQLException {
         String insertRating = "INSERT INTO Ratings(TitleId, AverageRating, NumVotes) VALUES(?,?,?);";
         Connection connection = null;
         PreparedStatement insertStmt = null;
@@ -43,18 +43,10 @@ public class RatingsDao {
             return null;
         } finally {
             if (connection != null) {
-                try {
-                    connection.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                connection.close();
             }
             if (insertStmt != null) {
-                try {
-                    insertStmt.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                insertStmt.close();
             }
         }
     }
@@ -77,6 +69,9 @@ public class RatingsDao {
                 int numVotes = results.getInt("NumVotes");
                 Rating rating = new Rating(title, averageRating, numVotes);
                 return rating;
+            } else {
+                Rating rating = create(new Rating(title, 0.0, 0));
+                return rating;
             }
         } finally {
             if (results != null) {
@@ -89,7 +84,6 @@ public class RatingsDao {
                 connection.close();
             }
         }
-        return null;
     }
 
 

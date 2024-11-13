@@ -111,6 +111,38 @@ public class ReviewsDao {
         return null;
     }
 
+    public Review update(Review review) throws SQLException {
+        String updateReview = "UPDATE Reviews SET rating=?, content=? WHERE reviewId=?;";
+        Connection connection = null;
+        PreparedStatement updateStmt = null;
+        try {
+            connection = connectionManager.getConnection();
+            updateStmt = connection.prepareStatement(updateReview);
+            updateStmt.setDouble(1, review.getRating());
+            updateStmt.setString(2, review.getContent());
+            updateStmt.setInt(3, review.getReviewId());
+            updateStmt.executeUpdate();
+
+            // Update the rating for the title
+            double oldRating = getReviewById(review.getReviewId()).getRating();
+            Rating originalRating = RatingsDao.getInstance().getRatingByTitle(review.getTitle());
+            double newRating = review.getRating();
+            double updatedRating = (originalRating.getAverageRating() * originalRating.getNumVotes() - oldRating + newRating) / originalRating.getNumVotes();
+            RatingsDao.getInstance().update(new Rating(review.getTitle(), updatedRating, originalRating.getNumVotes()));
+
+            return review;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw e;
+        } finally {
+            if (connection != null) {
+                connection.close();
+            }
+            if (updateStmt != null) {
+                updateStmt.close();
+            }
+        }
+    }
 
     public Review delete(Review review) throws SQLException {
         String deleteReview = "DELETE FROM Reviews WHERE reviewId=?;";

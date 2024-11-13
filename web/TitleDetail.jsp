@@ -109,6 +109,8 @@
 
       </div>
     </div>
+    <a href="reviewcreate?titleId=${title.titleId}" class="btn btn-primary">Add Review</a>
+    <a href="reviewsbytitle?titleId=${title.titleId}" class="btn btn-secondary">View Reviews</a>
   </c:if>
 
   <c:if test="${empty title}">

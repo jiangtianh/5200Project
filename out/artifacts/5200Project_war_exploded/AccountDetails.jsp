@@ -60,6 +60,12 @@
           <td><b>Profession:</b></td>
           <td><c:out value="${user.profession}"/></td>
         </tr>
+
+        <tr>
+          <td><b>Reviews:</b></td>
+          <td><a href="reviewsbyuser" class="btn btn-primary">View My Reviews</a></td>
+        </tr>
+
         </tbody>
       </table>
     </div>

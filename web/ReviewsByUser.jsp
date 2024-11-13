@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: jiangtianhan
   Date: 11/12/24
-  Time: 12:57 AM
+  Time: 2:55 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -18,7 +18,7 @@
 </head>
 <body>
 <div class="container mt-5">
-    <h1 class="text-center">Reviews of <c:out value="${title.primaryTitle}"/></h1>
+    <h1 class="text-center">Reviews by <c:out value="${username}"/></h1>
     <c:if test="${not empty reviews}">
         <div class="table-responsive">
             <table class="table table-bordered">
@@ -28,7 +28,6 @@
                     <th>Title</th>
                     <th>Content</th>
                     <th>Rating</th>
-                    <th>By User</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -37,17 +36,12 @@
                     <tr>
                         <td><c:out value="${review.reviewId}"/></td>
                         <td>
-                            <a href="titledetail?titleId=${title.titleId}">
-                                <c:out value="${title.primaryTitle}"/>
+                            <a href="titledetail?titleId=${review.title.titleId}">
+                                <c:out value="${review.title.primaryTitle}"/>
                             </a>
                         </td>
                         <td><c:out value="${review.content}"/></td>
                         <td><c:out value="${review.rating}"/></td>
-                        <td>
-                            <a href="finduser?username=${review.user.username}">
-                                <c:out value="${review.user.username}"/>
-                            </a>
-                        </td>
                         <td>
                             <c:if test="${review.user.username == loggedInUser.username}">
                                 <a href="reviewsedit?reviewId=${review.reviewId}" class="btn btn-warning">Edit</a>

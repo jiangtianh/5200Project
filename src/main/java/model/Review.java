@@ -20,15 +20,10 @@ public class Review {
         this.rating = rating;
         this.content = content;
     }
-    public Review (int reviewId, double rating, String content) {
+    public Review (int reviewId) {
         this.reviewId = reviewId;
     }
-    public Review (Title title) {
-        this.title = title;
-    }
-    public Review (User user) {
-        this.user = user;
-    }
+ 
 
 
 

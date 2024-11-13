@@ -48,4 +48,9 @@ public class UserFind extends HttpServlet {
 
         req.getRequestDispatcher("/UserFind.jsp").forward(req, resp);
     }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doPost(req, resp);
+    }
 }
