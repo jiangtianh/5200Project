@@ -29,6 +29,7 @@
             <input type="number" class="form-control" id="rating" name="rating" min="0" max="10" step="0.1" value="${review.rating}" />
         </div>
         <button type="submit" class="btn btn-primary">Update Review</button>
+        <a href="reviewdelete?reviewId=${review.reviewId}" class="btn btn-danger">Delete Review</a>
     </form>
     <a href="index.jsp" class="btn btn-secondary mt-3">Back to Home</a>
 </div>
