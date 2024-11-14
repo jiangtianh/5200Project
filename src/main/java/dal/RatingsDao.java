@@ -24,7 +24,7 @@ public class RatingsDao {
         return instance;
     }
 
-    public List<Title> getTopTitlesByRatingAndVotes(int limit, double minRating, int minVotes) throws SQLException {
+    public List<Title> getTopTitlesByRatingAndVotes(double minRating, int minVotes, int pageNumber, int pageSize) throws SQLException {
         List<Title> topTitles = new ArrayList<>();
         String selectTopTitles = "SELECT t.titleId, t.titleType, t.primaryTitle, t.originalTitle, " +
                                  "t.isAdult, t.startYear, t.endYear, t.runtimeMinutes " +
@@ -32,7 +32,7 @@ public class RatingsDao {
                                  "JOIN Ratings AS r ON t.titleId = r.titleId " +
                                  "WHERE r.averageRating >= ? AND r.numVotes >= ? " +
                                  "ORDER BY r.averageRating DESC, r.numVotes DESC " +
-                                 "LIMIT ?;";
+                                 "LIMIT ? OFFSET ?;";
 
         Connection connection = null;
         PreparedStatement selectStmt = null;
@@ -43,7 +43,8 @@ public class RatingsDao {
             selectStmt = connection.prepareStatement(selectTopTitles);
             selectStmt.setDouble(1, minRating);
             selectStmt.setInt(2, minVotes);
-            selectStmt.setInt(3, limit);
+            selectStmt.setInt(3, pageSize);
+            selectStmt.setInt(4, (pageNumber - 1) * pageSize);
             results = selectStmt.executeQuery();
 
             while (results.next()) {

@@ -40,6 +40,10 @@ public class RecommendationService {
             System.out.println(review.getTitle().getPrimaryTitle());
         }
 
+        if (userReviews.isEmpty()) {
+            return recommendTopRatedTitles(pageNumber, pageSize);
+        }
+
         Set<Integer> preferredGenreIds = new HashSet<>();
         for (Review review : userReviews) {
             if (review.getRating() >= 8) { // Filtering high-rated reviews
@@ -51,17 +55,9 @@ public class RecommendationService {
         }
 
         if (preferredGenreIds.isEmpty()) {
-            return recommendTopRatedTitles();
+            return recommendTopRatedTitles(pageNumber, pageSize);
         }
 
-        System.out.println("Preferred Genres: ");
-        for (Integer genreid : preferredGenreIds) {
-            System.out.println(genreid);
-        }
-
-        if(preferredGenreIds.isEmpty()) {
-            return recommendTopRatedTitles();
-        }
 
         double minRating = 8.0;
         int minVotes = 10000;
@@ -73,9 +69,9 @@ public class RecommendationService {
     }
 
     // 2. Recommend Top-Rated Titles for New Users
-    public List<Title> recommendTopRatedTitles() throws SQLException {
+    public List<Title> recommendTopRatedTitles(int pageNumber, int pageSize) throws SQLException {
         // Retrieving top-rated titles with minimum votes and high ratings
         System.out.println("Returning top-rated titles: ");
-        return ratingsDao.getTopTitlesByRatingAndVotes(100, 8.0, 10000); // Example parameters
+        return ratingsDao.getTopTitlesByRatingAndVotes(8.0, 10000, pageNumber, pageSize); // Example parameters
     }
 }
