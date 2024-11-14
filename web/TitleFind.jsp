@@ -41,16 +41,15 @@
         <div class="form-group">
             <label for="searchTitleType">Title Type</label>
             <select id="searchTitleType" name="searchTitleType" class="form-control">
-                <option value="all" ${param.searchTitletype == 'all' ? 'selected' : ''}>All</option>
-                <option value="movie" ${param.searchTitletype == 'movie' ? 'selected' : ''}>Movie</option>
-                <option value="short" ${param.searchTitletype == 'short' ? 'selected' : ''}>Short</option>
-                <option value="tvMovie" ${param.searchTitletype == 'tvMovie' ? 'selected' : ''}>TV Movie</option>
-                <option value="tvSeries" ${param.searchTitletype == 'tvSeries' ? 'selected' : ''}>TV Series</option>
-                <option value="tvEpisode" ${param.searchTitletype == 'tvEpisode' ? 'selected' : ''}>TV Episode</option>
-                <option value="tvSpecial" ${param.searchTitletype == 'tvSpecial' ? 'selected' : ''}>TV Special</option>
-                <option value="video" ${param.searchTitletype == 'video' ? 'selected' : ''}>Video</option>
-                <option value="videoGame" ${param.searchTitletype == 'videoGame' ? 'selected' : ''}>Video Game</option>
-
+                <option value="all" ${fn:escapeXml(param.searchTitleType) == 'all' ? 'selected' : ''}>All</option>
+                <option value="movie" ${fn:escapeXml(param.searchTitleType) == 'movie' ? 'selected' : ''}>Movie</option>
+                <option value="short" ${fn:escapeXml(param.searchTitleType) == 'short' ? 'selected' : ''}>Short</option>
+                <option value="tvMovie" ${fn:escapeXml(param.searchTitleType) == 'tvMovie' ? 'selected' : ''}>TV Movie</option>
+                <option value="tvSeries" ${fn:escapeXml(param.searchTitleType) == 'tvSeries' ? 'selected' : ''}>TV Series</option>
+                <option value="tvEpisode" ${fn:escapeXml(param.searchTitleType) == 'tvEpisode' ? 'selected' : ''}>TV Episode</option>
+                <option value="tvSpecial" ${fn:escapeXml(param.searchTitleType) == 'tvSpecial' ? 'selected' : ''}>TV Special</option>
+                <option value="video" ${fn:escapeXml(param.searchTitleType) == 'video' ? 'selected' : ''}>Video</option>
+                <option value="videoGame" ${fn:escapeXml(param.searchTitleType) == 'videoGame' ? 'selected' : ''}>Video Game</option>
             </select>
         </div>
 
