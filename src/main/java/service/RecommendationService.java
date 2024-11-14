@@ -40,10 +40,6 @@ public class RecommendationService {
             System.out.println(review.getTitle().getPrimaryTitle());
         }
 
-        if (userReviews.isEmpty()) {
-            return recommendTopRatedTitles();
-        }
-
         Set<Integer> preferredGenreIds = new HashSet<>();
         for (Review review : userReviews) {
             if (review.getRating() >= 8) { // Filtering high-rated reviews
@@ -52,6 +48,10 @@ public class RecommendationService {
                     preferredGenreIds.add(genre.getGenreId());
                 }
             }
+        }
+
+        if (preferredGenreIds.isEmpty()) {
+            return recommendTopRatedTitles();
         }
 
         System.out.println("Preferred Genres: ");
