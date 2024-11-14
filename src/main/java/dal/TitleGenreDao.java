@@ -71,8 +71,8 @@ public class TitleGenreDao {
         }
 
         StringBuilder queryBuilder = new StringBuilder();
-        queryBuilder.append("SELECT t.titleId, t.titleType, t.primaryTitle, t.originalTitle, ")
-                .append("t.isAdult, t.startYear, t.endYear, t.runtimeMinutes ")
+        queryBuilder.append("SELECT DISTINCT t.titleId, t.titleType, t.primaryTitle, t.originalTitle, ")
+                .append("t.isAdult, t.startYear, t.endYear, t.runtimeMinutes, r.averageRating, r.numVotes ")
                 .append("FROM Titles AS t ")
                 .append("JOIN TitleGenres AS tg ON t.titleId = tg.titleId ")
                 .append("JOIN Ratings AS r ON t.titleId = r.titleId ")
@@ -87,7 +87,6 @@ public class TitleGenreDao {
         queryBuilder.append(") AND r.averageRating >= ? AND r.numVotes >= ? ")
                 .append("ORDER BY r.averageRating DESC, r.numVotes DESC ")
                 .append("LIMIT ? OFFSET ?;");
-
         String selectTitles = queryBuilder.toString();
 
         Connection connection = null;
