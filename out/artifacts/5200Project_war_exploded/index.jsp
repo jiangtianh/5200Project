@@ -36,6 +36,9 @@
     <br/>
     <a href="accountdetails" class="btn btn-primary mt-2">Account Details</a>
     <br/>
+    <a href="recommendationbygenres" class="btn btn-primary mt-2">View Personalized Recommendation</a>
+    <br/>
+
     <a href="logout" class="btn btn-danger mt-4">Logout</a>
   </div>
 </div>

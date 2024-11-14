@@ -2,6 +2,7 @@ package model;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class Title {
 
@@ -93,5 +94,25 @@ public class Title {
 
     public void setRuntimeMinutes(int runtimeMinutes) {
         this.runtimeMinutes = runtimeMinutes;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Title title = (Title) o;
+        return isAdult == title.isAdult &&
+                startYear == title.startYear &&
+                endYear == title.endYear &&
+                runtimeMinutes == title.runtimeMinutes &&
+                Objects.equals(titleId, title.titleId) &&
+                Objects.equals(titleType, title.titleType) &&
+                Objects.equals(primaryTitle, title.primaryTitle) &&
+                Objects.equals(originalTitle, title.originalTitle);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(titleId, titleType, primaryTitle, originalTitle, isAdult, startYear, endYear, runtimeMinutes);
     }
 }
